@@ -1,13 +1,15 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.0.RELEASE'
+	id 'org.springframework.boot' version '2.5.2'
 }
 
 
 apply plugin: 'java'
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java-library'
 
 jacocoTestReport {
 	reports {
@@ -51,6 +53,7 @@ repositories {
             password nexusPassword
         }
         url "${nexusMavenRepositoryUrl}"
+        allowInsecureProtocol = true
     }
  }
 }
@@ -59,7 +62,14 @@ repositories {
         
      maven { url "https://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.1.RELEASE'
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.1.RELEASE'
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+}
+
+jar {
+    enabled = false
 }
