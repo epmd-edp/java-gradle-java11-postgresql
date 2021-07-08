@@ -3,7 +3,7 @@ FROM openjdk:11-jre-slim
 RUN mkdir /app
 WORKDIR /app
 
-ADD build/libs/*.jar /app/
+COPY build/libs/*.jar /app/
 EXPOSE 8080
 
 RUN printf "#!/bin/sh \n\
